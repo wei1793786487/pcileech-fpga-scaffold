@@ -26,6 +26,9 @@ Special thanks to:
 ### Usage
 Usage is the same as the original PCILeech FPGA project. Please refer to the [original project documentation](https://github.com/ufrisk/pcileech-fpga) for more information. 
 
+### Device Flexibility
+You can use this project to implement any PCIe device you wish to create. The flexible architecture allows for custom device implementations according to your specific requirements.
+
 
 # PCILeech FPGA WiFi 项目
 
@@ -54,5 +57,8 @@ Usage is the same as the original PCILeech FPGA project. Please refer to the [or
 
 ### 使用方法
 使用方式与原版PCILeech FPGA项目相同，请参考[原项目文档](https://github.com/ufrisk/pcileech-fpga)获取更多信息。
+
+### 设备灵活性
+你可以用此项目完成你想实现的任意PCIe设备。灵活的架构允许按照您的特定需求进行自定义设备实现。
 
 添加联系方式Q群 1044979352 
