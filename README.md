@@ -16,6 +16,9 @@ This is an enhanced version of the PCILeech FPGA project with the following new 
    - Implemented support for single-byte requests in the read engine
    - Enhanced data granularity for more precise memory operations
 
+5. **Added DNA Functionality**:
+   - Implemented device identification through DNA (Device-specific Unique Identifier)
+
 Special thanks to:
 - **ekk**
 - **ufrisk** 
@@ -40,6 +43,9 @@ Usage is the same as the original PCILeech FPGA project. Please refer to the [or
 4. **添加读引擎的单字节请求支持**：
    - 实现了读引擎中对单字节请求的支持
    - 增强了数据粒度，实现更精确的内存操作
+
+5. **添加DNA功能**：
+   - 实现了通过DNA（设备特定唯一标识符）进行设备识别
 
 ### 致谢
 特别感谢以下项目和贡献者：

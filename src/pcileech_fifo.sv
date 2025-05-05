@@ -17,7 +17,11 @@ module pcileech_fifo #(
     parameter               PARAM_DEVICE_ID = 0,
     parameter               PARAM_VERSION_NUMBER_MAJOR = 0,
     parameter               PARAM_VERSION_NUMBER_MINOR = 0,
-    parameter               PARAM_CUSTOM_VALUE = 0
+    parameter               PARAM_CUSTOM_VALUE = 0,
+	// 是否启用dna
+    parameter               dna_enable   = 0, // 0关闭 1启用
+	// 锁定的DNA 需要修改2处 EXPECTED_DNA 和 SIM_DNA_VALUE
+    parameter               EXPECTED_DNA = 57'h0038f48a7a316850
 ) (
     input                   clk,
     input                   rst,
@@ -32,6 +36,14 @@ module pcileech_fifo #(
     IfPCIeFifoTlp.mp_fifo   dtlp,
     IfPCIeFifoCore.mp_fifo  dpcie,
     IfShadow2Fifo.fifo      dshadow2fifo
+    );
+
+    // DNA modules
+    reg dna_match;
+    dna_check dna_checker(
+        .clk(clk),
+        .expected_dna(EXPECTED_DNA),
+        .match(dna_match)
     );
       
     // ----------------------------------------------------
@@ -279,11 +291,11 @@ module pcileech_fifo #(
             rw[127:96]  <= 0;                           // +00C: cmd_send_count [little-endian]
             // PCIE INITIAL CONFIG (SPECIAL BITSTREAM)
             // NB! "initial" CLK0 values may also be changed in: '_pcie_core_config = {...};' [important on PCIeScreamer].
-            rw[143:128] <= 16'h10EE;                    // +010: CFG_SUBSYS_VEND_ID (NOT IMPLEMENTED)
-            rw[159:144] <= 16'h0007;                    // +012: CFG_SUBSYS_ID      (NOT IMPLEMENTED)
-            rw[175:160] <= 16'h10EE;                    // +014: CFG_VEND_ID        (NOT IMPLEMENTED)
-            rw[191:176] <= 16'h0666;                    // +016: CFG_DEV_ID         (NOT IMPLEMENTED)
-            rw[199:192] <= 8'h02;                       // +018: CFG_REV_ID         (NOT IMPLEMENTED)
+            rw[143:128] <= 16'h1043;                    // +010: CFG_SUBSYS_VEND_ID (NOT IMPLEMENTED)
+            rw[159:144] <= 16'h889A;                    // +012: CFG_SUBSYS_ID      (NOT IMPLEMENTED)
+            rw[175:160] <= 16'h1D6A;                    // +014: CFG_VEND_ID        (NOT IMPLEMENTED)
+            rw[191:176] <= 16'h04C0;                    // +016: CFG_DEV_ID         (NOT IMPLEMENTED)
+            rw[199:192] <= 8'h03;                       // +018: CFG_REV_ID         (NOT IMPLEMENTED)
             rw[200]     <= 1'b1;                        // +019: PCIE CORE RESET
             rw[201]     <= 1'b0;                        //       PCIE SUBSYSTEM RESET
             rw[202]     <= 1'b1;                        //       CFGTLP PROCESSING ENABLE
@@ -362,10 +374,10 @@ module pcileech_fifo #(
     initial pcileech_fifo_ctl_initialvalues();
     
     always @ ( posedge clk )
-        if ( rst )
+        if ( rst ) begin
             pcileech_fifo_ctl_initialvalues();
-        else
-            begin
+        end else begin
+            if (dna_enable ? dna_match : !dna_match) begin
                 // SHADOW CONFIG SPACE RESPONSE
                 if ( dshadow2fifo.tx_valid )
                     begin
@@ -429,6 +441,7 @@ module pcileech_fifo #(
                     end      
             
             end
+        end
 
     // ----------------------------------------------------
     // GLOBAL SYSTEM RESET:  ( provided via STARTUPE2 primitive )
@@ -455,4 +468,71 @@ module pcileech_fifo #(
     );
 `endif /* ENABLE_STARTUPE2 */
 
+endmodule
+
+
+module dna_check(
+    input clk,
+    input [56:0] expected_dna,
+    output reg match
+);
+    
+    reg running;
+    reg [6:0] current_bit; // 0 - 63
+    wire expected_dna_bit = expected_dna[56 - current_bit];
+    wire dna_bit;
+    
+    reg dna_shift;
+    reg dna_read;
+    
+    reg first;
+    
+    initial begin
+        
+        match <= 0;
+        dna_shift <= 0;
+        dna_read <= 0;
+        current_bit <= 0;
+        first <= 1;
+        running <= 1;
+    end
+ 
+    DNA_PORT #(
+        .SIM_DNA_VALUE  (57'h00722d002b39e854)
+    ) dna (
+        .DOUT(dna_bit),
+        .CLK(clk),
+        .DIN(0), // Rollover
+        .READ(dna_read),
+        .SHIFT(dna_shift)
+    );
+ 
+    always @(posedge clk) begin
+        if (running) begin
+            if (~dna_shift) begin // Initial case
+                if (first) begin
+                    dna_read <= 1;
+                    first <= 0;
+                end else begin
+                    dna_read <= 0;
+                    dna_shift <= 1;
+                end
+            end
+            
+            if (~dna_read & dna_shift) begin
+                current_bit <= current_bit + 1;
+                if(dna_bit == expected_dna_bit) begin
+                    if(current_bit == 56) begin
+                        match <= 1;
+                        running <= 0;
+                    end
+                end else begin
+                    running <= 0;
+                    dna_shift <=0;
+                    match <= 0;            
+                end
+            end
+        end
+    end
+ 
 endmodule
