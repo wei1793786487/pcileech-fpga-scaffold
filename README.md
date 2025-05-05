@@ -53,10 +53,12 @@ You can use this project to implement any PCIe device you wish to create. The fl
 ### 致谢
 特别感谢以下项目和贡献者：
 - **ekk**的贡献
-- **ufrisk**的贡献
+- **ufrisk**大哥的贡献
 
 ### 使用方法
 使用方式与原版PCILeech FPGA项目相同，请参考[原项目文档](https://github.com/ufrisk/pcileech-fpga)获取更多信息。
+
+ekknod的项目地址[https://github.com/ekknod/pcileech-wifi]
 
 ### 设备灵活性
 你可以用此项目完成你想实现的任意PCIe设备。灵活的架构允许按照您的特定需求进行自定义设备实现。
