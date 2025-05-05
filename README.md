@@ -17,14 +17,14 @@ This is an enhanced version of the PCILeech FPGA project with the following new 
    - Enhanced data granularity for more precise memory operations
 
 Special thanks to:
-- **ekk**'
+- **ekk**
 - **ufrisk** 
 
 ### Usage
 Usage is the same as the original PCILeech FPGA project. Please refer to the [original project documentation](https://github.com/ufrisk/pcileech-fpga) for more information. 
 
 
-# PCILeech FPGA WiFi 项目 (PCILeech FPGA WiFi Project)
+# PCILeech FPGA WiFi 项目
 
 这是PCILeech FPGA项目的改进版本，新增了以下功能和改进：
 
@@ -48,3 +48,5 @@ Usage is the same as the original PCILeech FPGA project. Please refer to the [or
 
 ### 使用方法
 使用方式与原版PCILeech FPGA项目相同，请参考[原项目文档](https://github.com/ufrisk/pcileech-fpga)获取更多信息。
+
+添加联系方式Q群 1044979352 
