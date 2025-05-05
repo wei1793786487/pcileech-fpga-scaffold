@@ -1,0 +1,50 @@
+# PCILeech FPGA WiFi Project
+
+This is an enhanced version of the PCILeech FPGA project with the following new features and improvements:
+
+### Major Updates
+1. **Added Caption 100T Script**: Added support for the Captain 100T device to work with PCILeech.
+   
+2. **Merged RW1C Handling**: Improved handling of PCI configuration space RW1C (Read-Write-1-Clear) registers, optimizing configuration space read/write operations.
+
+3. **Added MSI and MSIX Interrupt Support**:
+   - Added MSI (Message Signaled Interrupts) sending capability
+   - Implemented MSIX interrupt support, allowing devices to send MSIX type interrupts
+   - Enhanced interrupt handling logic for improved system stability
+
+4. **Added Single-Byte Request Support for Read Engine**:
+   - Implemented support for single-byte requests in the read engine
+   - Enhanced data granularity for more precise memory operations
+
+Special thanks to:
+- **ekk**'
+- **ufrisk** 
+
+### Usage
+Usage is the same as the original PCILeech FPGA project. Please refer to the [original project documentation](https://github.com/ufrisk/pcileech-fpga) for more information. 
+
+
+# PCILeech FPGA WiFi 项目 (PCILeech FPGA WiFi Project)
+
+这是PCILeech FPGA项目的改进版本，新增了以下功能和改进：
+
+### 主要更新
+1. **添加Caption 100T脚本**：新增对Captain 100T设备的支持，使其可以与PCILeech一起使用。
+   
+2. **合并RW1C**：改进了对PCI配置空间RW1C（Read-Write-1-Clear）寄存器的处理，优化了配置空间的读写操作。
+
+3. **添加MSI和MSIX中断支持**：
+   - 新增了MSI（Message Signaled Interrupts）发送功能
+   - 增加了MSIX中断支持，允许设备发送MSIX类型的中断
+
+4. **添加读引擎的单字节请求支持**：
+   - 实现了读引擎中对单字节请求的支持
+   - 增强了数据粒度，实现更精确的内存操作
+
+### 致谢
+特别感谢以下项目和贡献者：
+- **ekk**的贡献
+- **ufrisk**的贡献
+
+### 使用方法
+使用方式与原版PCILeech FPGA项目相同，请参考[原项目文档](https://github.com/ufrisk/pcileech-fpga)获取更多信息。
