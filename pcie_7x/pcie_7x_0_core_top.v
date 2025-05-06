@@ -38,7 +38,7 @@ module pcie_7x_0_core_top # (
   parameter         C_DATA_WIDTH = 64,
   parameter         EXT_PIPE_SIM = "FALSE",
   parameter         ALLOW_X8_GEN2 = "FALSE",
-  parameter         PIPE_PIPELINE_STAGES = 1,
+  parameter         PIPE_PIPELINE_STAGES = 0, // 修改速率 2.5G速率为0 5G速率为1 
 
   parameter         CMD_INTX_IMPLEMENTED = "TRUE", // 传统中断 实现为TRUE否则为FALSE
   parameter [7:0]   INTERRUPT_PIN = 8'h1,          // 传统中断 PIN NONE=8'h0 INTA=8'h1  
@@ -139,7 +139,7 @@ module pcie_7x_0_core_top # (
   // MSI Capability 
 
   // BEGIN
-  parameter         MSI_CAP_64_BIT_ADDR_CAPABLE = "FALSE",        // Message Control 64 bit address capable     0b = "FALSE" 1b = "TRUE"
+  parameter         MSI_CAP_64_BIT_ADDR_CAPABLE = "TRUE",        // Message Control 64 bit address capable     0b = "FALSE" 1b = "TRUE"
   parameter         MSI_CAP_PER_VECTOR_MASKING_CAPABLE = "FALSE", // Message Control Per-vector masking capable 0b = "FALSE" 1b = "TRUE"
   parameter         MSI_CAP_MULTIMSGCAP = 0,                      // Message Multiple Message Capable           000b = 0 001b = 1  010b = 2 011b = 3 100b = 4 ...
   // END
@@ -205,7 +205,7 @@ module pcie_7x_0_core_top # (
   parameter         LINK_CAP_ASPM_SUPPORT = 3,                 //  Active State Power Management Control 
   parameter         LINK_CAP_SURPRISE_DOWN_ERROR_CAPABLE = "FALSE",
   parameter         LINK_CAP_DLL_LINK_ACTIVE_REPORTING_CAP = "FALSE",
-  parameter         LINK_CAP_ASPM_OPTIONALITY = "FALSE",
+  parameter         LINK_CAP_ASPM_OPTIONALITY = "FALSE", // ASPM Optionality Compliance
   parameter         LINK_STATUS_SLOT_CLOCK_CONFIG = "TRUE",
   // END
 
@@ -219,7 +219,7 @@ module pcie_7x_0_core_top # (
 
   // BEGIN
   // LINK CONTROL2 CAP
-  parameter [3:0]   LINK_CTRL2_TARGET_LINK_SPEED = 4'h0,
+  parameter [3:0]   LINK_CTRL2_TARGET_LINK_SPEED = 4'h0, // 修改速率 4'h0 = 2.5GT  4'h2 = 5GT 
   parameter         LINK_CTRL2_HW_AUTONOMOUS_SPEED_DISABLE = "FALSE",
   parameter         LINK_CTRL2_DEEMPHASIS = "FALSE",
   parameter         PCIE_REVISION = 2,
@@ -233,8 +233,8 @@ module pcie_7x_0_core_top # (
   parameter         DEV_CAP_RSVD_17_16 = 0,
   parameter         DEV_CAP_FUNCTION_LEVEL_RESET_CAPABLE = "FALSE",
   parameter         DEV_CAP_RSVD_31_29 = 0,
-  parameter [3:0]   LINK_CAP_MAX_LINK_SPEED = 4'h1,
-  parameter [5:0]   LINK_CAP_MAX_LINK_WIDTH = 6'h1,
+  parameter [3:0]   LINK_CAP_MAX_LINK_SPEED = 4'h1,  // 修改速率 4'h1 = 2.5GT  4'h2 = 5GT   
+  parameter [5:0]   LINK_CAP_MAX_LINK_WIDTH = 6'h1,  // 修改速率 4'h1 = x1  4'h2 = x2    4'h4 = x4
   parameter         LINK_CONTROL_RCB = 0,
   parameter         LINK_CAP_RSVD_23 = 0,
   parameter         LINK_CAP_LINK_BANDWIDTH_NOTIFICATION_CAP = "FALSE",
@@ -343,7 +343,7 @@ module pcie_7x_0_core_top # (
   parameter [14:0]  LL_REPLAY_TIMEOUT = 15'h0000,
   parameter         LL_REPLAY_TIMEOUT_EN = "FALSE",
   parameter integer LL_REPLAY_TIMEOUT_FUNC = 1,
-  parameter [5:0]   LTSSM_MAX_LINK_WIDTH = 6'h1,
+  parameter [5:0]   LTSSM_MAX_LINK_WIDTH = 6'h1, // 修改速率 4'h1 = x1  4'h2 = x2  4'h4 = x4
 
   parameter         RECRC_CHK = 0,
   parameter         RECRC_CHK_TRIM = "FALSE",
@@ -365,7 +365,7 @@ module pcie_7x_0_core_top # (
   parameter         UR_ATOMIC = "FALSE",
   parameter         UR_INV_REQ = "TRUE",
   parameter         UR_PRS_RESPONSE = "TRUE",
-  parameter         USER_CLK_FREQ = 1,
+  parameter         USER_CLK_FREQ = 1, // 修改速率  x1 2.5gt = 1 x1 5gt = 1  x2 2.5gt = 1 x2 5gt = 2  x4 2.5gt = 2 x4 5gt = 3
   parameter         USER_CLK2_DIV2 = "FALSE",
 
   parameter         VC0_CPL_INFINITE = "TRUE",
