@@ -4,7 +4,7 @@ This is an enhanced version of the PCILeech FPGA project with the following new 
 
 ### Major Updates
 
-1. **Added Caption 100T Script**: Added support for the Captain 100T device to work with PCILeech.
+1. **Added Captain 100T Script**: Added support for the Captain 100T device to work with PCILeech.
 2. **Merged RW1C Handling**: Improved handling of PCI configuration space RW1C (Read-Write-1-Clear) registers, optimizing configuration space read/write operations.
 
 3. **Added MSI and MSIX Interrupt Support**:
@@ -40,7 +40,7 @@ You can use this project to implement any PCIe device you wish to create. The fl
 
 ### 主要更新
 
-1. **添加 Caption 100T 脚本**：新增对 Captain 100T 设备的支持，使其可以与 PCILeech 一起使用。
+1. **添加 Captain 100T 脚本**：新增对 Captain 100T 设备的支持，使其可以与 PCILeech 一起使用。
 2. **合并 RW1C**：改进了对 PCI 配置空间 RW1C（Read-Write-1-Clear）寄存器的处理，优化了配置空间的读写操作。
 
 3. **添加 MSI 和 MSIX 中断支持**：
