@@ -425,7 +425,7 @@ module pcileech_pcie_cfg_a7(
 
 
                 // 判断bar寄存器有没有被初始化 发送一次配置读 将pci配置空间的值读取回来
-                if ((base_address_register_reg == 32'h00000000) | (base_address_register_reg == base_address_addr_mask) &  base_address_addr_mask != 32'h00000000)
+                if (((base_address_register_reg == 32'h00000000) | (base_address_register_reg == base_address_addr_mask)) &  base_address_addr_mask != 32'h00000000)
                     if ( ~in_cmd_read & ~in_cmd_write & ~rw[RWPOS_CFG_RD_EN] & ~rw[RWPOS_CFG_WR_EN] & ~rwi_cfg_mgmt_rd_en & ~rwi_cfg_mgmt_wr_en )
                         begin
                             rw[RWPOS_CFG_RD_EN] <= 1'b1;
@@ -436,7 +436,7 @@ module pcileech_pcie_cfg_a7(
                             rw[175]     <= 0;                                   // cfg_mgmt_byte_en
                         end
 
-               if ((base_address_register_1_reg == 32'h00000000) | (base_address_register_1_reg == base_address_addr_mask_1) &  base_address_addr_mask_1 != 32'h00000000)
+               if (((base_address_register_1_reg == 32'h00000000) | (base_address_register_1_reg == base_address_addr_mask_1)) & (base_address_addr_mask_1 != 32'h00000000))
                     if ( ~in_cmd_read & ~in_cmd_write & ~rw[RWPOS_CFG_RD_EN] & ~rw[RWPOS_CFG_WR_EN] & ~rwi_cfg_mgmt_rd_en & ~rwi_cfg_mgmt_wr_en )
                         begin
                             rw[RWPOS_CFG_RD_EN] <= 1'b1;
@@ -447,18 +447,18 @@ module pcileech_pcie_cfg_a7(
                             rw[175]     <= 0;                                   // cfg_mgmt_byte_en
                         end
 
-               if ((base_address_register_2_reg == 32'h00000000) | (base_address_register_2_reg == base_address_addr_mask_2) &  base_address_addr_mask_2 != 32'h00000000)
-                    if ( ~in_cmd_read & ~in_cmd_write & ~rw[RWPOS_CFG_RD_EN] & ~rw[RWPOS_CFG_WR_EN] & ~rwi_cfg_mgmt_rd_en & ~rwi_cfg_mgmt_wr_en )
-                        begin
-                            rw[RWPOS_CFG_RD_EN] <= 1'b1;
-                            rw[169:160] <= 6;                                   // cfg_mgmt_dwaddr
-                            rw[172]     <= 0;                                   // cfg_mgmt_byte_en
-                            rw[173]     <= 0;                                   // cfg_mgmt_byte_en
-                            rw[174]     <= 0;                                   // cfg_mgmt_byte_en
-                            rw[175]     <= 0;                                   // cfg_mgmt_byte_en
-                        end
+                if (((base_address_register_2_reg == 32'h00000000) | (base_address_register_2_reg == base_address_addr_mask_2)) &  base_address_addr_mask_2 != 32'h00000000)
+                        if ( ~in_cmd_read & ~in_cmd_write & ~rw[RWPOS_CFG_RD_EN] & ~rw[RWPOS_CFG_WR_EN] & ~rwi_cfg_mgmt_rd_en & ~rwi_cfg_mgmt_wr_en )
+                            begin
+                                rw[RWPOS_CFG_RD_EN] <= 1'b1;
+                                rw[169:160] <= 6;                                   // cfg_mgmt_dwaddr
+                                rw[172]     <= 0;                                   // cfg_mgmt_byte_en
+                                rw[173]     <= 0;                                   // cfg_mgmt_byte_en
+                                rw[174]     <= 0;                                   // cfg_mgmt_byte_en
+                                rw[175]     <= 0;                                   // cfg_mgmt_byte_en
+                            end
                                                 
-               if ((base_address_register_3_reg == 32'h00000000) | (base_address_register_3_reg == base_address_addr_mask_3) &  base_address_addr_mask_3 != 32'h00000000)
+               if (((base_address_register_3_reg == 32'h00000000) | (base_address_register_3_reg == base_address_addr_mask_3)) &  base_address_addr_mask_3 != 32'h00000000)
                     if ( ~in_cmd_read & ~in_cmd_write & ~rw[RWPOS_CFG_RD_EN] & ~rw[RWPOS_CFG_WR_EN] & ~rwi_cfg_mgmt_rd_en & ~rwi_cfg_mgmt_wr_en )
                         begin
                             rw[RWPOS_CFG_RD_EN] <= 1'b1;
@@ -468,7 +468,7 @@ module pcileech_pcie_cfg_a7(
                             rw[174]     <= 0;                                   // cfg_mgmt_byte_en
                             rw[175]     <= 0;                                   // cfg_mgmt_byte_en
                         end       
-               if ((base_address_register_4_reg == 32'h00000000) | (base_address_register_4_reg == base_address_addr_mask_4) &  base_address_addr_mask_4 != 32'h00000000)
+               if (((base_address_register_4_reg == 32'h00000000) | (base_address_register_4_reg == base_address_addr_mask_4)) &  base_address_addr_mask_4 != 32'h00000000)
                     if ( ~in_cmd_read & ~in_cmd_write & ~rw[RWPOS_CFG_RD_EN] & ~rw[RWPOS_CFG_WR_EN] & ~rwi_cfg_mgmt_rd_en & ~rwi_cfg_mgmt_wr_en )
                         begin
                             rw[RWPOS_CFG_RD_EN] <= 1'b1;
@@ -478,7 +478,7 @@ module pcileech_pcie_cfg_a7(
                             rw[174]     <= 0;                                   // cfg_mgmt_byte_en
                             rw[175]     <= 0;                                   // cfg_mgmt_byte_en
                         end   
-               if ((base_address_register_5_reg == 32'h00000000) | (base_address_register_5_reg == base_address_addr_mask_5) &  base_address_addr_mask_5 != 32'h00000000)
+               if (((base_address_register_5_reg == 32'h00000000) | (base_address_register_5_reg == base_address_addr_mask_5)) &  base_address_addr_mask_5 != 32'h00000000)
                     if ( ~in_cmd_read & ~in_cmd_write & ~rw[RWPOS_CFG_RD_EN] & ~rw[RWPOS_CFG_WR_EN] & ~rwi_cfg_mgmt_rd_en & ~rwi_cfg_mgmt_wr_en )
                         begin
                             rw[RWPOS_CFG_RD_EN] <= 1'b1;
