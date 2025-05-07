@@ -1,4 +1,4 @@
-# PCILeech FPGA WiFi Project
+# PCILeech FPGA Project
 
 This is an enhanced version of the PCILeech FPGA project with the following new features and improvements:
 
@@ -34,7 +34,7 @@ Usage is the same as the original PCILeech FPGA project. Please refer to the [or
 
 You can use this project to implement any PCIe device you wish to create. The flexible architecture allows for custom device implementations according to your specific requirements.
 
-# PCILeech FPGA WiFi 项目
+# PCILeech FPGA 项目
 
 这是 PCILeech FPGA 项目的改进版本，新增了以下功能和改进：
 
