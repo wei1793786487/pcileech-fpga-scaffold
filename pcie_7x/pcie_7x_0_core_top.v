@@ -7,20 +7,20 @@ module pcie_7x_0_core_top # (
 
   //CFG SPACE key parameters
   //begin    
-  parameter CFG_DEV_ID         = 16'h168C,    // 修改Device ID信息 
-  parameter CFG_VEND_ID        = 16'h002B,    // 修改Vendor ID信息
+  parameter CFG_DEV_ID         = 16'h818B,    // 修改Device ID信息 
+  parameter CFG_VEND_ID        = 16'h10EC,    // 修改Vendor ID信息
   parameter CLASS_CODE         = 24'h028000,  // 修改Class Code值
-  parameter CFG_REV_ID         = 8'h01,       // 修改Revision ID信息
+  parameter CFG_REV_ID         = 8'h00,       // 修改Revision ID信息
 
   parameter [7:0]   HEADER_TYPE = 8'h00,
 
-  parameter CFG_SUBSYS_ID      = 16'h168C,    // 修改Subsystem ID信息 
-  parameter CFG_SUBSYS_VEND_ID = 16'h30A4,    // 修改Subsystem_Vendor ID信息
+  parameter CFG_SUBSYS_ID      = 16'h818B,    // 修改Subsystem ID信息 
+  parameter CFG_SUBSYS_VEND_ID = 16'h10EC,    // 修改Subsystem_Vendor ID信息
 
-  parameter [31:0]  BAR0 = 32'hFFE00000,      // 修改Bar0值
+  parameter [31:0]  BAR0 = 32'hFFFFFF01,      // 修改Bar0值
   parameter [31:0]  BAR1 = 32'h00000000,
-  parameter [31:0]  BAR2 = 32'h00000000,
-  parameter [31:0]  BAR3 = 32'h00000000,
+  parameter [31:0]  BAR2 = 32'hFFFFC004,
+  parameter [31:0]  BAR3 = 32'hFFFFFFFF,
   parameter [31:0]  BAR4 = 32'h00000000,
   parameter [31:0]  BAR5 = 32'h00000000,
   
@@ -29,7 +29,7 @@ module pcie_7x_0_core_top # (
 
 
   parameter [5:0]   EXT_CFG_CAP_PTR = 6'h3F,      //  PCI 配置空间接管指针
-  parameter [9:0]   EXT_CFG_XP_CAP_PTR = 10'h3FF, //  PCI Express Extended 配置空间接管指针
+  parameter [9:0]   EXT_CFG_XP_CAP_PTR = 10'h54,  //  PCI Express Extended 配置空间接管指针
 
   parameter [31:0]  CARDBUS_CIS_POINTER = 32'h00000000,
   parameter [31:0]  EXPANSION_ROM = 32'h00000000,
@@ -38,7 +38,8 @@ module pcie_7x_0_core_top # (
   parameter         C_DATA_WIDTH = 64,
   parameter         EXT_PIPE_SIM = "FALSE",
   parameter         ALLOW_X8_GEN2 = "FALSE",
-  parameter         PIPE_PIPELINE_STAGES = 0, // 修改速率 2.5G速率为0 5G速率为1 
+
+  parameter         PIPE_PIPELINE_STAGES = 0,  // 修改速率 2.5G速率为0 5G速率为1 
 
   parameter         CMD_INTX_IMPLEMENTED = "TRUE", // 传统中断 实现为TRUE否则为FALSE
   parameter [7:0]   INTERRUPT_PIN = 8'h1,          // 传统中断 PIN NONE=8'h0 INTA=8'h1  
@@ -83,12 +84,12 @@ module pcie_7x_0_core_top # (
   parameter [11:0]  VC_CAP_NEXTPTR = 12'h160,
 
   // DSN CAP
-  parameter         DSN_CAP_ON = "FALSE",
-  parameter [11:0]  DSN_BASE_PTR = 12'h160,
-  parameter [11:0]  DSN_CAP_NEXTPTR = 12'h000,
+  parameter         DSN_CAP_ON = "TRUE",
+  parameter [11:0]  DSN_BASE_PTR = 12'h140,
+  parameter [11:0]  DSN_CAP_NEXTPTR = 12'h150,
 
   // AER CAP
-  parameter         AER_CAP_ON = "FALSE",
+  parameter         AER_CAP_ON = "TRUE",
   parameter [11:0]  AER_BASE_PTR = 12'h100,
   parameter [11:0]  AER_CAP_NEXTPTR = 12'h140,
 
@@ -105,12 +106,12 @@ module pcie_7x_0_core_top # (
 
   // BEGIN
   parameter         PM_CAP_VERSION = 3,         // PMC Version     01b = 1 10b = 2  11b = 3
-  parameter         PM_CAP_PME_CLOCK = "FALSE", // PMC PME Clock   0b = "FALSE" 1b = "TRUE"
-  parameter         PM_CAP_AUXCURRENT = 0,      // PMC Aux Current 000b=0 001b=1 010b=2 ...
-  parameter         PM_CAP_D1SUPPORT = "FALSE", // PMC D1 Support  0b = "FALSE" 1b = "TRUE"
-  parameter         PM_CAP_D2SUPPORT = "FALSE", // PMC D2 Support  0b = "FALSE" 1b = "TRUE"
-  parameter [4:0]   PM_CAP_PMESUPPORT = 5'h00,  // PMC PME Support 00000b = 5'h00 00001b = 5'h01 00011b = 5'h03 00111b = 5'07 01111b = 5'h0F  11111b = 5'h1F 
-  parameter         PM_CSR_NOSOFTRST = "TRUE",  // PMCSR NO Soft Reset 0b = "FALSE" 1b = "TRUE"
+  parameter         PM_CAP_PME_CLOCK = "TRUE", // PMC PME Clock   0b = "FALSE" 1b = "TRUE"
+  parameter         PM_CAP_AUXCURRENT = 1,      // PMC Aux Current 000b=0 001b=1 010b=2 ...
+  parameter         PM_CAP_D1SUPPORT = "TRUE", // PMC D1 Support  0b = "FALSE" 1b = "TRUE"
+  parameter         PM_CAP_D2SUPPORT = "TRUE", // PMC D2 Support  0b = "FALSE" 1b = "TRUE"
+  parameter [4:0]   PM_CAP_PMESUPPORT = 5'h1F,  // PMC PME Support 00000b = 5'h00 00001b = 5'h01 00011b = 5'h03 00111b = 5'07 01111b = 5'h0F  11111b = 5'h1F 
+  parameter         PM_CSR_NOSOFTRST = "FALSE",  // PMCSR NO Soft Reset 0b = "FALSE" 1b = "TRUE"
   // END
 
   parameter         PM_CAP_RSVD_04 = 0,
@@ -219,7 +220,7 @@ module pcie_7x_0_core_top # (
 
   // BEGIN
   // LINK CONTROL2 CAP
-  parameter [3:0]   LINK_CTRL2_TARGET_LINK_SPEED = 4'h0, // 修改速率 4'h0 = 2.5GT  4'h2 = 5GT 
+  parameter [3:0]   LINK_CTRL2_TARGET_LINK_SPEED = 4'h0, // 修改速率 4'h0 = 2.5GT  4'h2 = 5GT   
   parameter         LINK_CTRL2_HW_AUTONOMOUS_SPEED_DISABLE = "FALSE",
   parameter         LINK_CTRL2_DEEMPHASIS = "FALSE",
   parameter         PCIE_REVISION = 2,
@@ -343,7 +344,7 @@ module pcie_7x_0_core_top # (
   parameter [14:0]  LL_REPLAY_TIMEOUT = 15'h0000,
   parameter         LL_REPLAY_TIMEOUT_EN = "FALSE",
   parameter integer LL_REPLAY_TIMEOUT_FUNC = 1,
-  parameter [5:0]   LTSSM_MAX_LINK_WIDTH = 6'h1, // 修改速率 4'h1 = x1  4'h2 = x2  4'h4 = x4
+  parameter [5:0]   LTSSM_MAX_LINK_WIDTH = 6'h1,  // 修改速率 4'h1 = x1  4'h2 = x2  4'h4 = x4
 
   parameter         RECRC_CHK = 0,
   parameter         RECRC_CHK_TRIM = "FALSE",
@@ -365,7 +366,7 @@ module pcie_7x_0_core_top # (
   parameter         UR_ATOMIC = "FALSE",
   parameter         UR_INV_REQ = "TRUE",
   parameter         UR_PRS_RESPONSE = "TRUE",
-  parameter         USER_CLK_FREQ = 1, // 修改速率  x1 2.5gt = 1 x1 5gt = 1  x2 2.5gt = 1 x2 5gt = 2  x4 2.5gt = 2 x4 5gt = 3
+  parameter         USER_CLK_FREQ = 1,  // 修改速率  x1 2.5gt = 1 x1 5gt = 1  x2 2.5gt = 1 x2 5gt = 2  x4 2.5gt = 2 x4 5gt = 3
   parameter         USER_CLK2_DIV2 = "FALSE",
 
   parameter         VC0_CPL_INFINITE = "TRUE",

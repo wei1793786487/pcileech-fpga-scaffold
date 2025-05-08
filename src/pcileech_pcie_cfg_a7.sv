@@ -238,9 +238,9 @@ module pcileech_pcie_cfg_a7(
 
 
             // 修改这里bar的sizing value (Modify the sizing value of the bar here)
-            base_address_addr_mask   <= 32'hFFE00000;
+            base_address_addr_mask   <= 32'h00000000;
             base_address_addr_mask_1 <= 32'h00000000;
-            base_address_addr_mask_2 <= 32'h00000000;
+            base_address_addr_mask_2 <= 32'hFFFFC004;
             base_address_addr_mask_3 <= 32'h00000000;
             base_address_addr_mask_4 <= 32'h00000000;
             base_address_addr_mask_5 <= 32'h00000000;
