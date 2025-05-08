@@ -77,7 +77,7 @@ ekknod 的[项目地址](https://github.com/ekknod/pcileech-wifi)
 
 本项目现已支持模拟生成Realtek 8192ee无线网卡设备。通过此功能，您可以在FPGA上模拟一个完整功能的8192ee无线网卡，用于测试、开发或安全研究。
 
-![8192ee无线网卡](生成的bin(Genrated BIN)/8192ee.png)
+![8192ee无线网卡](./生成的bin(Genrated%20BIN)/8192ee.png)
 
 #### 使用方法
 
